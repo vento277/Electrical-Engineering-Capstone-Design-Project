@@ -20,11 +20,13 @@ roscore & sleep 3
 export ROS_MASTER_URI=http://192.168.0.179:11311
 export ROS_HOSTNAME=192.168.0.179
 
-# Launch necessary modules in background
+# Launch IMU (AHRS)
 roslaunch fdilink_ahrs ahrs_data.launch & sleep 2
+
+# Launch MAVROS for PX4 connection
 roslaunch mavros px4.launch & sleep 2
 
-# Launch USB webcam using usb_cam node
+# Launch USB webcam (raw output)
 rosrun usb_cam usb_cam_node \
   _video_device:=/dev/video0 \
   _image_width:=640 \
@@ -33,6 +35,6 @@ rosrun usb_cam usb_cam_node \
   _camera_frame_id:=usb_cam \
   & sleep 2
 
-# Republish USB camera image as compressed (for use with Depth-Anything or SLAM)
-rosrun image_transport republish raw in:=/usb_cam/image_raw compressed out:=/camera/color/image_raw/compressed &
+# Republish webcam image as compressed (for Depth-Anything)
+rosrun image_transport republish raw in:=/usb_cam/image_raw compressed out:=/camera/image/compressed &
 
