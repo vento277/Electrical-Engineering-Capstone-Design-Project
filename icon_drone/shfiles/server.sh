@@ -8,21 +8,22 @@ source ~/ELEC491_TL101/icon_drone/devel/setup.bash
 export DISPLAY=:0
 
 # Sync system clock
-sudo systemctl restart chrony
+#sudo systemctl restart chrony
 
 # Reset any existing ROS nodes
-pkill -f ros & sleep 3
+pkill -f ros & sleep 5
 
 # Start ROS core in background
-roscore & sleep 3
+roscore & sleep 5
 
 # Set ROS networking
-export ROS_MASTER_URI=http://192.168.0.179:11311
-export ROS_HOSTNAME=192.168.0.179
+export ROS_MASTER_URI=http://192.168.0.101:11311
+export ROS_HOSTNAME=192.168.0.101
 
 # Launch necessary modules in background
-roslaunch fdilink_ahrs ahrs_data.launch & sleep 2
-roslaunch mavros px4.launch & sleep 2
+roslaunch fdilink_ahrs ahrs_data.launch & sleep 5
+roslaunch mavros px4.launch & sleep 5
+# rosrun mavros mavsys rate --all 100
 
 # Launch RealSense with optimized config
 roslaunch realsense2_camera rs_camera.launch \
@@ -38,9 +39,10 @@ roslaunch realsense2_camera rs_camera.launch \
   depth_width:=640 depth_height:=480 depth_fps:=30 \
   infra_width:=640 infra_height:=480 infra_fps:=30 \
   align_depth:=false \
-  & sleep 2
+  & sleep 5
 
 # Start IR image compression
-rosrun image_transport republish raw in:=/camera/infra1/image_rect_raw compressed out:=/image1 &
-rosrun image_transport republish raw in:=/camera/infra2/image_rect_raw compressed out:=/image2 &
+#rosrun image_transport republish raw in:=/camera/infra1/image_rect_raw compressed out:=/image1 &
+#rosrun image_transport republish raw in:=/camera/infra2/image_rect_raw compressed out:=/image2 &
 
+roslaunch px4ctrl run_ctrl.launch & sleep 5
