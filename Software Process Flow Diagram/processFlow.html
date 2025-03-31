@@ -102,9 +102,9 @@
       {
         name: "Wi-Fi",
         subprocesses: [
-          { name: "Method", progress: 75 },
-          { name: "Link Budget", progress: 90 },
-          { name: "Software Pipeline", progress: 0 }
+          { name: "Method", progress: 100 },
+          { name: "Link Budget", progress: 100 },
+          { name: "Software Pipeline", progress: 50 }
         ]
       },
       {
@@ -113,18 +113,18 @@
           {
             name: "Initialization",
             subprocesses: [
-              { name: "OS", progress: 80 } // New subprocess added here
+              { name: "OS", progress: 100 } // New subprocess added here
             ]
           },
           { 
             name: "Wi-Fi",
             subprocesses: [
               { name: "Initialization", progress: 100 },
-              { name: "Software Pipeline", progress: 0 }
+              { name: "Software Pipeline", progress: 50 }
             ]
           },
           { name: "ROS", progress: 0 },
-          { name: "Camera", progress: 0 },
+          { name: "Camera", progress: 30 },
           { name: "Thermal Camera", progress: 0 },
           { name: "Air Quality Sensor", progress: 0 }
         ]
