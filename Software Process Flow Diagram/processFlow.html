@@ -102,9 +102,14 @@
       {
         name: "Wi-Fi",
         subprocesses: [
-          { name: "Method", progress: 100 },
-          { name: "Link Budget", progress: 100 },
-          { name: "Software Pipeline", progress: 50 }
+          { name: "Method",
+           subprocesses: [
+             { name: "Method Type", progress: 100 },
+             { name: "Component Selection", progress: 100},
+             { name: "Data flow plan", progress: 80}
+           ] 
+          },
+          { name: "Link Budget", progress: 100 }
         ]
       },
       {
@@ -120,7 +125,13 @@
             name: "Wi-Fi",
             subprocesses: [
               { name: "Initialization", progress: 100 },
-              { name: "Software Pipeline", progress: 50 }
+              { name: "Software Pipeline", 
+               subprocesses: [
+                 { name: "Data flow plan", progress: 80},
+                 { name: "Data to Local Host", progress: 50},
+                 { name: "Data to RPi", progress: 20}
+               ]
+              }
             ]
           },
           { name: "ROS", progress: 0 },
