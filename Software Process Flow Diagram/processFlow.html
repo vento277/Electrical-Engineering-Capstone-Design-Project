@@ -95,16 +95,20 @@
         subprocesses: [
           { name: "Installation", progress: 50 },
           { name: "ROS", progress: 20 },
-          { name: "RealSense SDK", progress: 30 },
-          { name: "Gazebo", progress: 10 }
+          { name: "RealSense SDK", progress: 30 }
         ]
       },
       {
         name: "Wi-Fi",
         subprocesses: [
-          { name: "Method", progress: 75 },
-          { name: "Link Budget", progress: 90 },
-          { name: "Software Pipeline", progress: 0 }
+          { name: "Method",
+           subprocesses: [
+             { name: "Method Type", progress: 80 },
+             { name: "Component Selection", progress: 90},
+             { name: "Data flow plan", progress: 80}
+           ] 
+          },
+          { name: "Link Budget", progress: 100 }
         ]
       },
       {
@@ -113,18 +117,24 @@
           {
             name: "Initialization",
             subprocesses: [
-              { name: "OS", progress: 80 } // New subprocess added here
+              { name: "OS", progress: 100 } // New subprocess added here
             ]
           },
           { 
             name: "Wi-Fi",
             subprocesses: [
               { name: "Initialization", progress: 100 },
-              { name: "Software Pipeline", progress: 0 }
+              { name: "Software Pipeline", 
+               subprocesses: [
+                 { name: "Data flow plan", progress: 80},
+                 { name: "Data to Local Host", progress: 50},
+                 { name: "Data to RPi", progress: 20}
+               ]
+              }
             ]
           },
           { name: "ROS", progress: 0 },
-          { name: "Camera", progress: 0 },
+          { name: "Camera", progress: 30 },
           { name: "Thermal Camera", progress: 0 },
           { name: "Air Quality Sensor", progress: 0 }
         ]
