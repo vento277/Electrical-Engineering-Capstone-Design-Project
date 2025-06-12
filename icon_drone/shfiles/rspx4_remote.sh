@@ -1,7 +1,7 @@
 sudo chmod 777 /dev/ttyACM0 & sleep 2;
 export ROS_MASTER_URI=http://<B IP>:11311
 export ROS_IP=<B IP>
-roscore
+roscore && sleep 5;
 
 roslaunch realsense2_camera rs_camera.launch & sleep 1;
 roslaunch fdilink_ahrs ahrs_data.launch & sleep 1;
