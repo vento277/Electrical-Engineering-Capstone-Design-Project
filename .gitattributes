@@ -1,0 +1,6 @@
+build filter=lfs diff=lfs merge=lfs -text
+devel filter=lfs diff=lfs merge=lfs -text
+/icon_drone/build filter=lfs diff=lfs merge=lfs -text
+/icon_drone/devel filter=lfs diff=lfs merge=lfs -text
+icon_drone/build filter=lfs diff=lfs merge=lfs -text
+icon_drone/devel filter=lfs diff=lfs merge=lfs -text
