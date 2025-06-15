@@ -1,0 +1,8 @@
+prefix=/home/raeditio/Documents/ELEC491_TL101/icon_drone/devel
+
+Name: loop_fusion
+Description: Description of loop_fusion
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

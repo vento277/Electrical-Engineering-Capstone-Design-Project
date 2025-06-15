@@ -1,0 +1,8 @@
+prefix=/home/raeditio/Documents/ELEC491_TL101/icon_drone/devel
+
+Name: realsense2_description
+Description: Description of realsense2_description
+Version: 2.3.2
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
