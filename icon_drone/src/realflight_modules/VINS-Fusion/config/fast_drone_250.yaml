@@ -16,7 +16,7 @@ image1_topic: "/camera/infra2/image_rect_raw"
 # image1_topic: "/image2"
 
 
-output_path: "/home/icondrone2/vins_output"
+output_path: "/home/raeditio/Documents/ELEC491_TL101/icon_drone/vins_output"
 
 
 cam0_calib: "left.yaml"
