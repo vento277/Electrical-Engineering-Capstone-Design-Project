@@ -1,0 +1,13 @@
+../Core/Src/main.c:93:10:ReadSingleADCChannel	4
+../Core/Src/main.c:137:6:ReadAllADCChannelsSeparately	1
+../Core/Src/main.c:156:6:ProcessADCReadings	1
+../Core/Src/main.c:182:6:CreateDataPacket	1
+../Core/Src/main.c:206:6:float_to_bytes	1
+../Core/Src/main.c:229:5:main	1
+../Core/Src/main.c:282:6:SystemClock_Config	4
+../Core/Src/main.c:329:13:MX_ADC1_Init	5
+../Core/Src/main.c:391:13:MX_I2C1_Init	2
+../Core/Src/main.c:428:13:MX_TIM1_Init	8
+../Core/Src/main.c:507:13:MX_TIM2_Init	5
+../Core/Src/main.c:560:13:MX_GPIO_Init	1
+../Core/Src/main.c:604:6:Error_Handler	1
