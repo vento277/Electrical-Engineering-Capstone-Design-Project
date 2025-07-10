@@ -8,4 +8,7 @@ pkill -f ros & sleep 2
 export ROS_MASTER_URI=http://192.168.0.179:11311
 export ROS_HOSTNAME=192.168.0.100
 
+rosrun image_transport republish compressed in:=/image1 raw out:=/vins/image1
+rosrun image_transport republish compressed in:=/image2 raw out:=/vins/image2
+
 roslaunch vins fast_drone_250.launch
