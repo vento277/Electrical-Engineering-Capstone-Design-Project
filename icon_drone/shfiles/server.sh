@@ -7,7 +7,7 @@ export DISPLAY=:0
 
 sudo systemctl restart chrony
 
-pkill -f ros
+pkill -f ros & sleep 2
 
 roscore & sleep 2
 export ROS_MASTER_URI=http://192.168.0.179:11311
