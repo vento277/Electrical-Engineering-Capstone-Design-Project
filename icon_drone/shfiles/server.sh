@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 source /opt/ros/noetic/setup.bash
@@ -30,6 +31,5 @@ roslaunch realsense2_camera rs_camera.launch \
   align_depth:=false \
   & sleep 2
 
-rosrun image_transport republish raw in:=/camera/infra1/image_rect_raw compressed out:=/camera/infra1/image_rect_raw/compressed
-rosrun image_transport republish raw in:=/camera/infra2/image_rect_raw compressed out:=/camera/infra2/image_rect_raw/compressed
-
+rosrun image_transport republish raw in:=/camera/infra1/image_rect_raw compressed out:=/image1
+rosrun image_transport republish raw in:=/camera/infra2/image_rect_raw compressed out:=/image2
