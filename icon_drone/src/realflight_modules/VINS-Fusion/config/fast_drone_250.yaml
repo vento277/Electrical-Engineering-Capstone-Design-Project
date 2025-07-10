@@ -8,8 +8,9 @@ num_of_cam: 2
 
 # imu_topic: "/mavros/imu/data"
 imu_topic: "/imu"
-image0_topic: "/camera/infra1/image_rect_raw"
-image1_topic: "/camera/infra2/image_rect_raw"
+image0_topic: "/camera/infra1/image_rect_raw/compressed"
+image1_topic: "/camera/infra2/image_rect_raw/compressed"
+image_transport: compressed
 
 # imu_topic: "/camera/imu"
 # image0_topic: "/image1"
@@ -252,7 +253,7 @@ g_norm: 9.805         # gravity magnitude
 # g_norm: 9.805         # gravity magnitude
 
 #unsynchronization parameters
-estimate_td: 0                      # online estimate time offset between camera and imu
+estimate_td: 1                      # online estimate time offset between camera and imu
 td: -0.01                    # initial value of time offset. unit: s. readed image clock + td = real image clock (IMU clock)
 
 

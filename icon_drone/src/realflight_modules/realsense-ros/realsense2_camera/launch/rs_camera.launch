@@ -35,7 +35,7 @@
   <arg name="enable_color"        default="false"/>
 
   <arg name="fisheye_fps"         default="30"/>
-  <arg name="depth_fps"           default="30"/>
+  <arg name="depth_fps"           default="15"/>
   <arg name="infra_fps"           default="30"/>
   <arg name="color_fps"           default="30"/>
   <arg name="gyro_fps"            default="200"/>
@@ -61,7 +61,7 @@
   <arg name="initial_reset"             default="false"/>
   <arg name="reconnect_timeout"         default="6.0"/>
   <arg name="wait_for_device_timeout"   default="-1.0"/>
-  <arg name="unite_imu_method"          default="none"/>
+  <arg name="unite_imu_method"          default="linear_interpolation"/>
   <arg name="topic_odom_in"             default="odom_in"/>
   <arg name="calib_odom_file"           default=""/>
   <arg name="publish_odom_tf"           default="false"/>
