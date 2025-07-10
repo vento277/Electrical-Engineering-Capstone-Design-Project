@@ -26,7 +26,7 @@ roslaunch realsense2_camera rs_camera.launch \
   enable_sync:=true \
   unite_imu_method:=none \
   depth_width:=640 depth_height:=480 depth_fps:=15 \
-  infra_width:=640 infra_height:=480 infra_fps:=30 \
+  infra_width:=640 infra_height:=480 infra_fps:=15 \
   align_depth:=false \
   & sleep 2
 

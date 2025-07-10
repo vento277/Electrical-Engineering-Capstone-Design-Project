@@ -25,20 +25,12 @@ Estimator estimator;
 
 queue<sensor_msgs::ImuConstPtr> imu_buf;
 queue<sensor_msgs::PointCloudConstPtr> feature_buf;
-// queue<sensor_msgs::ImageConstPtr> img0_buf;
-queue<sensor_msgs::CompressedImageConstPtr> img0_buf;
+queue<sensor_msgs::ImageConstPtr> img0_buf;
 queue<sensor_msgs::ImageConstPtr> img1_buf;
 std::mutex m_buf;
 
 
-// void img0_callback(const sensor_msgs::ImageConstPtr &img_msg)
-// {
-//     m_buf.lock();
-//     img0_buf.push(img_msg);
-//     m_buf.unlock();
-// }
-
-void img0_callback(const sensor_msgs::CompressedImageConstPtr &img_msg)
+void img0_callback(const sensor_msgs::ImageConstPtr &img_msg)
 {
     m_buf.lock();
     img0_buf.push(img_msg);
@@ -72,18 +64,6 @@ cv::Mat getImageFromMsg(const sensor_msgs::ImageConstPtr &img_msg)
         ptr = cv_bridge::toCvCopy(img_msg, sensor_msgs::image_encodings::MONO8);
 
     cv::Mat img = ptr->image.clone();
-    return img;
-}
-
-cv::Mat getImageFromMsg(const sensor_msgs::CompressedImageConstPtr &img_msg)
-{
-    cv_bridge::CvImageConstPtr ptr;
-    ptr = cv_bridge::toCvCopy(img_msg, sensor_msgs::image_encodings::BGR8);
-
-    cv::Mat _img = ptr->image.clone();
-    cv::Mat img;
-    cv::cvtColor(_img, img, CV_BGRA2GRAY);
- 
     return img;
 }
 
@@ -273,8 +253,6 @@ int main(int argc, char **argv)
     if(USE_IMU)
     {
         sub_imu = n.subscribe(IMU_TOPIC, 2000, imu_callback, ros::TransportHints().tcpNoDelay());
-    } else {
-        printf("not using IMU\n");
     }
     ros::Subscriber sub_feature = n.subscribe("/feature_tracker/feature", 2000, feature_callback);
     ros::Subscriber sub_img0 = n.subscribe(IMAGE0_TOPIC, 100, img0_callback);
