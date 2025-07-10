@@ -1,1 +1,0 @@
-#timestamppx py pz qx qy qz qw
