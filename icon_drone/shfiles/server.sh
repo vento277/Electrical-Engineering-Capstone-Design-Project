@@ -11,20 +11,18 @@ export DISPLAY=:0
 sudo systemctl restart chrony
 
 # Reset any existing ROS nodes
-pkill -f ros
-sleep 2
+pkill -f ros & sleep 3
 
 # Start ROS core in background
-roscore
-sleep 2
+roscore & sleep 3
 
 # Set ROS networking
 export ROS_MASTER_URI=http://192.168.0.179:11311
 export ROS_HOSTNAME=192.168.0.179
 
 # Launch necessary modules in background
-roslaunch fdilink_ahrs ahrs_data.launch &
-roslaunch mavros px4.launch &
+roslaunch fdilink_ahrs ahrs_data.launch & sleep 2
+roslaunch mavros px4.launch & sleep 2
 
 # Launch RealSense with optimized config
 roslaunch realsense2_camera rs_camera.launch \
