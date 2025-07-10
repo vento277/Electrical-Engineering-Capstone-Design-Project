@@ -1,4 +1,7 @@
 <launch>
+  <!-- rviz launch config -->
+  <arg name="rviz" default="true"/>
+
   <!-- size of map, change the size in x, y, z according to your application -->
   <arg name="map_size_x" value="8.0"/>
   <arg name="map_size_y" value="24.0"/>
@@ -87,7 +90,13 @@
     <arg name="p_num" value="130"/>
   </include> -->
 
-  <node name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find plan_manage)/config/traj.rviz" />
+  <!-- Conditional RViz launch -->
+  <node if="$(arg rviz)"
+        name="rvizvisualisation"
+        pkg="rviz"
+        type="rviz"
+        output="log"
+        args="-d $(find plan_manage)/config/traj.rviz" />
   <node pkg="tf" type="static_transform_publisher" name="tf_53" args="0 0 0 0 0 0 world navigation 100" />
 
 </launch>
