@@ -8,9 +8,8 @@ num_of_cam: 2
 
 # imu_topic: "/mavros/imu/data"
 imu_topic: "/imu"
-image0_topic: "/camera/infra1/image_rect_raw/compressed"
-image1_topic: "/camera/infra2/image_rect_raw/compressed"
-image_transport: compressed
+image0_topic: "/camera/infra1/image_rect_raw"
+image1_topic: "/camera/infra2/image_rect_raw"
 
 # imu_topic: "/camera/imu"
 # image0_topic: "/image1"
