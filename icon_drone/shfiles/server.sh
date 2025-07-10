@@ -12,10 +12,10 @@ sudo systemctl restart chrony
 
 # Reset any existing ROS nodes
 pkill -f ros
-sleep 1
+sleep 2
 
 # Start ROS core in background
-roscore &
+roscore
 sleep 2
 
 # Set ROS networking
@@ -24,9 +24,7 @@ export ROS_HOSTNAME=192.168.0.179
 
 # Launch necessary modules in background
 roslaunch fdilink_ahrs ahrs_data.launch &
-sleep 1
 roslaunch mavros px4.launch &
-sleep 1
 
 # Launch RealSense with optimized config
 roslaunch realsense2_camera rs_camera.launch \
@@ -41,9 +39,8 @@ roslaunch realsense2_camera rs_camera.launch \
   unite_imu_method:=none \
   depth_width:=640 depth_height:=480 depth_fps:=30 \
   infra_width:=640 infra_height:=480 infra_fps:=30 \
-  align_depth:=false &
-
-sleep 2
+  align_depth:=false \
+  & sleep 2
 
 # Start IR image compression
 rosrun image_transport republish raw in:=/camera/infra1/image_rect_raw compressed out:=/image1 &

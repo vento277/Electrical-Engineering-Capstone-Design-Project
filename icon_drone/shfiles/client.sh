@@ -9,7 +9,7 @@ sudo systemctl restart chrony
 
 # Reset any existing ROS nodes
 pkill -f ros
-sleep 1
+sleep 2
 
 # Set ROS networking
 export ROS_MASTER_URI=http://192.168.0.179:11311
@@ -24,5 +24,5 @@ sleep 2
 
 # Launch VINS and FUEL in parallel
 roslaunch vins fast_drone_250.launch &
-sleep 2
-roslaunch exploration_manager exploration.launch rviz:=false &
+# roslaunch exploration_manager exploration.launch rviz:=false &
+# roslaunch px4ctrl run_ctrl.launch &
