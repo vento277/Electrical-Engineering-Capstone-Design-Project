@@ -8,4 +8,4 @@ pkill -f ros
 export ROS_MASTER_URI=http://192.168.0.179:11311
 export ROS_HOSTNAME=192.168.0.100
 
-roslaunch vin fast_drone_250.launch
+roslaunch vins fast_drone_250.launch
