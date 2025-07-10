@@ -1,5 +1,7 @@
 sudo apt install git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev cmake
 sudo apt install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
+
+cd ~/Documents
 git clone https://github.com/IntelRealSense/librealsense.git
 cd librealsense
 mkdir build && cd build
