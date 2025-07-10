@@ -20,5 +20,5 @@ rosrun image_transport republish compressed in:=/image2 raw out:=/vins/image2 & 
 
 # Launch VINS and FUEL in parallel
 roslaunch vins fast_drone_250.launch & sleep 2
-# roslaunch exploration_manager exploration.launch rviz:=false & sleep 2
-# roslaunch px4ctrl run_ctrl.launch & sleep 2
+roslaunch exploration_manager exploration.launch rviz:=false & sleep 2
+roslaunch px4ctrl run_ctrl.launch & sleep 2
