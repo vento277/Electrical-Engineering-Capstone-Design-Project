@@ -5,7 +5,7 @@ source /opt/ros/noetic/setup.bash
 source ~/Documents/ELEC491_TL101/icon_drone/devel/setup.bash
 
 # Sync system clock
-sudo systemctl restart chrony
+# sudo systemctl restart chrony
 
 # Reset any existing ROS nodes
 pkill -f ros & sleep 3
