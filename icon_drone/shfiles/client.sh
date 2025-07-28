@@ -20,11 +20,10 @@ rosrun image_transport republish compressed in:=/camera/image/compressed raw out
 # Start Depth-Anything node to infer depth
 rosrun depth_anything depth_anything_node.py & sleep 2
 
-# Launch ORB-SLAM3 in RGB-D-Inertial mode
-rosrun ORB_SLAM3 ros_rgbd_inertial \
-  ~/ORB_SLAM3/Vocabulary/ORBvoc.txt \
-  ~/ORB_SLAM3/Examples/RGB-D-Inertial/RealSense_D435i.yaml \
-  true &  # Visualization enabled
+# Launch ORB-SLAM3 in Mono-Inertial mode (using RGB-D node with mono camera)
+rosrun orb_slam3_ros ros_mono_inertial_node \
+  /home/raeditio/Documents/ELEC491_TL101/icon_drone/src/realflight_modules/ORB_SLAM3/Vocabulary/ORBvoc.txt \
+  /home/raeditio/Documents/ELEC491_TL101/icon_drone/src/realflight_modules/ORB_SLAM3/default_camera.yaml &
 sleep 2
 
 # Optional: Exploration logic
