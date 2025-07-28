@@ -5,7 +5,7 @@ source /opt/ros/noetic/setup.bash
 source ~/Documents/ELEC491_TL101/icon_drone/devel/setup.bash
 
 # Sync system clock
-sudo systemctl restart chrony
+# sudo systemctl restart chrony
 
 # Reset any existing ROS nodes
 pkill -f ros & sleep 3
@@ -14,11 +14,22 @@ pkill -f ros & sleep 3
 export ROS_MASTER_URI=http://192.168.0.179:11311
 export ROS_HOSTNAME=192.168.0.100
 
-# Start decompression republishers
-rosrun image_transport republish compressed in:=/image1 raw out:=/vins/image1 & sleep 2
-rosrun image_transport republish compressed in:=/image2 raw out:=/vins/image2 & sleep 2
+# Republish compressed webcam image to raw (ORB-SLAM3 expects raw)
+rosrun image_transport republish compressed in:=/camera/image/compressed raw out:=/camera/image_raw & sleep 2
 
-# Launch VINS and FUEL in parallel
-roslaunch vins fast_drone_250.launch & sleep 2
+# Start Depth-Anything node to infer depth
+rosrun depth_anything depth_anything_node.py & sleep 2
+
+# Launch ORB-SLAM3 in RGB-D-Inertial mode
+rosrun ORB_SLAM3 ros_rgbd_inertial \
+  ~/ORB_SLAM3/Vocabulary/ORBvoc.txt \
+  ~/ORB_SLAM3/Examples/RGB-D-Inertial/RealSense_D435i.yaml \
+  true &  # Visualization enabled
+sleep 2
+
+# Optional: Exploration logic
 roslaunch exploration_manager exploration.launch rviz:=false & sleep 2
+
+# Launch controller (ensure it does not conflict with MAVROS)
 roslaunch px4ctrl run_ctrl.launch & sleep 2
+
