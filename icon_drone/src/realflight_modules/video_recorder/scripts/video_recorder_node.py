@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
 import rospy
-import cv2
 import os
+import subprocess
+import signal
+import time
 from datetime import datetime
 from sensor_msgs.msg import Image
 from std_srvs.srv import Empty, EmptyResponse
@@ -15,15 +17,17 @@ class VideoRecorderNode:
         # Parameters
         self.video_dir = rospy.get_param('~video_dir', 
             os.path.expanduser('~/Documents/ELEC491_TL101/icon_drone/videos'))
-        self.fps = rospy.get_param('~fps', 30.0)
-        self.codec = rospy.get_param('~codec', 'MJPG')
+        self.video_device = rospy.get_param('~video_device', '/dev/video6')
+        self.video_resolution = rospy.get_param('~video_resolution', '1280x720')
+        self.fps = rospy.get_param('~fps', 30)
+        self.codec = rospy.get_param('~codec', 'mjpeg')
         self.topic = rospy.get_param('~image_topic', '/usb_cam/image_raw')
         
         # Create video directory
         os.makedirs(self.video_dir, exist_ok=True)
         
         # Initialize recording state
-        self.video_writer = None
+        self.recording_process = None
         self.bridge = CvBridge()
         self.recording_enabled = False
         self.recording_active = False
@@ -81,46 +85,49 @@ class VideoRecorderNode:
             cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
             
             # Initialize video writer on first frame after enable
-            if self.video_writer is None and self.recording_enabled:
-                height, width, _ = cv_image.shape
-                fourcc = cv2.VideoWriter_fourcc(*self.codec)
-                self.video_writer = cv2.VideoWriter(
-                    self.video_filename, 
-                    fourcc, 
-                    self.fps, 
-                    (width, height)
-                )
+            if self.recording_process is None and self.recording_enabled:
+                # FFmpeg command
+                ffmpeg_command = [
+                    'ffmpeg',
+                    '-f', 'v4l2',  # Use Linux video capture interface
+                    '-framerate', str(self.fps),
+                    '-video_size', self.video_resolution,
+                    '-i', self.video_device,
+                    '-c:v', self.codec,
+                    self.video_filename
+                ]
+
+                # Start FFmpeg process
+                self.recording_process = subprocess.Popen(ffmpeg_command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                self.recording_active = True
+                self.frame_count = 0
                 
-                if self.video_writer.isOpened():
-                    self.recording_active = True
-                    self.frame_count = 0
-                    rospy.loginfo("RECORDING STARTED")
-                    rospy.loginfo(f"Resolution: {width}x{height}")
-                    rospy.loginfo(f"FPS: {self.fps}")
-                    rospy.loginfo(f"Codec: {self.codec}")
-                else:
-                    rospy.logerr("Failed to initialize video writer")
-                    return
+                rospy.loginfo("RECORDING STARTED")
+                rospy.loginfo(f"Video file: {os.path.basename(self.video_filename)}")
+                rospy.loginfo(f"Resolution: {self.video_resolution}")
+                rospy.loginfo(f"FPS: {self.fps}")
+                rospy.loginfo(f"Codec: {self.codec}")
+            else:
+                rospy.logerr("Failed to initialize video writer")
+                return
             
-            # Write frame to video
-            if self.recording_active and self.video_writer is not None:
-                self.video_writer.write(cv_image)
-                self.frame_count += 1
+            # Log progress every 10 seconds (300 frames at 30fps)
+            if self.recording_active and self.frame_count % 300 == 0:
+                duration = self.frame_count / self.fps
+                rospy.loginfo(f"Recording: {duration:.1f}s ({self.frame_count} frames)")
                 
-                # Log progress every 10 seconds (300 frames at 30fps)
-                if self.frame_count % 300 == 0:
-                    duration = self.frame_count / self.fps
-                    rospy.loginfo(f"Recording: {duration:.1f}s ({self.frame_count} frames)")
-                    
+            self.frame_count += 1
+            
         except Exception as e:
             rospy.logerr(f"Error in image callback: {e}")
     
     def stop_recording(self):
         """Stop recording session"""
-        if self.video_writer is not None:
+        if self.recording_process is not None:
             self.recording_active = False
-            self.video_writer.release()
-            self.video_writer = None
+            self.recording_process.send_signal(signal.SIGINT)  # Send interrupt signal to FFmpeg
+            self.recording_process.wait()  # Wait for FFmpeg to terminate
+            self.recording_process = None
             
             duration = self.frame_count / self.fps if self.fps > 0 else 0
             
