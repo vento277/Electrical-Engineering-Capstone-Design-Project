@@ -28,6 +28,9 @@ rosrun orb_slam3_ros ros_mono_inertial_node \
   /home/raeditio/Documents/ELEC491_TL101/icon_drone/src/realflight_modules/ORB_SLAM3/default_camera.yaml &
 sleep 2
 
+# Start pose converter (PoseStamped -> Odometry)
+rosrun pose_converter pose_converter_node.py & sleep 1
+
 # Optional: Exploration logic
 roslaunch exploration_manager exploration.launch rviz:=false & sleep 2
 
