@@ -93,3 +93,5 @@ target_link_libraries(ros_mono_inertial_node
   OpenSSL::Crypto
   ${THIRDPARTY_DIR}/g2o/lib/libg2o.so
 )
+
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ~/Pangolin)
