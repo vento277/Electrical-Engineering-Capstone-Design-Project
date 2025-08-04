@@ -26,8 +26,7 @@ export ROS_HOSTNAME=192.168.0.179
 roslaunch fdilink_ahrs ahrs_data.launch & sleep 2
 
 # Launch MAVROS for PX4 connection (without IMU publishing)
-roslaunch mavros px4.launch \
-  publish_imu:=false & sleep 2
+roslaunch mavros px4.launch & sleep 2
 
 # Launch USB webcam (raw output) - Updated resolution
 rosrun usb_cam usb_cam_node \
