@@ -38,7 +38,7 @@ rosrun usb_cam usb_cam_node \
   & sleep 2
 
 # Republish webcam image as compressed for Depth-Anything
-rosrun image_transport republish raw in:=/usb_cam/image_raw compressed out:=/camera/image/compressed &
+rosrun image_transport republish raw in:=/usb_cam/image_raw compressed out:=/camera/image &
 
 # Start video recording node (ready to receive commands)
 roslaunch video_recorder video_recorder.launch &

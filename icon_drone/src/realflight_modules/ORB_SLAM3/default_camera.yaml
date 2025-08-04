@@ -51,12 +51,13 @@ IMU.T_b_c1: !!opencv-matrix
           0.0, 0.0, 1.0, 0.0,
           0.0, 0.0, 0.0, 1.0]
 
-# IMU noise parameters (adjust based on your IMU specifications)
-IMU.NoiseGyro: 1e-3
-IMU.NoiseAcc: 1e-2
-IMU.GyroWalk: 1e-6
-IMU.AccWalk: 1e-4
-IMU.Frequency: 200.0
+# IMU Configuration - CORRECTED TOPIC NAME
+IMU.topic: "/imu"        # NOT /imu/data
+IMU.frequency: 200       # Matches your 199.9 Hz rate
+IMU.NoiseGyro: 1.7e-4    
+IMU.NoiseAcc: 2.0e-3     
+IMU.GyroWalk: 1.9e-5     
+IMU.AccWalk: 3.0e-3      
 
 # Do not insert keyframes when recently lost
 IMU.InsertKFsWhenLost: 0
