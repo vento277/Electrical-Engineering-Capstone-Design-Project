@@ -7,22 +7,22 @@ File.version: "1.0"
 
 Camera.type: "PinHole"
 
-# Camera calibration parameters - using your calibration data
-Camera1.fx: 908.1286805363305
-Camera1.fy: 908.6504899131667
-Camera1.cx: 573.1734967410252
-Camera1.cy: 461.7797150177321
+# Camera calibration parameters - scaled for 1280x720
+Camera1.fx: 605.4191203575537
+Camera1.fy: 605.7669932754445
+Camera1.cx: 382.11566449401683
+Camera1.cy: 307.85314334515473
 
-# Distortion parameters from your camera calibration
+# Distortion parameters from your camera calibration (unchanged)
 Camera1.k1: 0.013919634121503452
 Camera1.k2: 0.05126755406314241
 Camera1.p1: 0.0015114910405962395
 Camera1.p2: 0.001145895728355362
 Camera1.k3: -0.22226158566827822
 
-# Camera resolution - using 1920x1080 as requested
-Camera.width: 1920
-Camera.height: 1080
+# Camera resolution - updated to match camera capability
+Camera.width: 1280
+Camera.height: 720
 
 # Camera frames per second 
 Camera.fps: 30
@@ -38,7 +38,7 @@ Stereo.b: 0.0  # Not used for monocular setup
 RGBD.DepthMapFactor: 1000.0
 
 #--------------------------------------------------------------------------------------------
-# IMU Parameters (Adjust for your specific IMU!)
+# IMU Parameters
 #--------------------------------------------------------------------------------------------
 
 # Transformation from body-frame (IMU) to camera frame
@@ -51,9 +51,9 @@ IMU.T_b_c1: !!opencv-matrix
           0.0, 0.0, 1.0, 0.0,
           0.0, 0.0, 0.0, 1.0]
 
-# IMU Configuration - CORRECTED TOPIC NAME
-IMU.topic: "/imu"        # NOT /imu/data
-IMU.frequency: 200       # Matches your 199.9 Hz rate
+# IMU Configuration
+IMU.topic: "/imu"
+IMU.frequency: 200
 IMU.NoiseGyro: 1.7e-4    
 IMU.NoiseAcc: 2.0e-3     
 IMU.GyroWalk: 1.9e-5     

@@ -17,7 +17,7 @@ rosservice call /video_recorder/start_recording
 sleep 2
 
 # Republish compressed webcam image to raw (ORB-SLAM3 expects raw)
-rosrun image_transport republish compressed in:=/camera/image/compressed raw out:=/camera/image_raw & sleep 2
+rosrun image_transport republish compressed in:=/camera/image raw out:=/camera/image_raw & sleep 2
 
 # Start Depth-Anything node to infer depth
 rosrun depth_anything depth_anything_node.py & sleep 2

@@ -29,9 +29,10 @@ roslaunch mavros px4.launch \
 # Launch USB webcam (raw output) - Updated resolution
 rosrun usb_cam usb_cam_node \
   _video_device:=/dev/video6 \
-  _image_width:=1920 \
-  _image_height:=1080 \
-  _pixel_format:=yuyv \
+  _image_width:=1280 \
+  _image_height:=720 \
+  _pixel_format:=mjpg \
+  _framerate:=30 \
   _camera_frame_id:=usb_cam \
   _auto_focus:=false \
   _focus:=0 \
