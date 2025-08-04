@@ -47,3 +47,8 @@ rosrun image_transport republish raw in:=/camera/infra2/image_rect_raw compresse
 roslaunch px4ctrl run_ctrl.launch & sleep 5
 
 roslaunch mavros px4.launch & sleep 5
+
+# Start video recording node (ready to receive commands)
+roslaunch video_recorder video_recorder.launch &
+
+echo "Server setup complete. Video recorder ready for remote commands."
