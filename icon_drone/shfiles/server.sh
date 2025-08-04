@@ -39,3 +39,7 @@ rosrun usb_cam usb_cam_node \
 # Republish webcam image as compressed for Depth-Anything
 rosrun image_transport republish raw in:=/usb_cam/image_raw compressed out:=/camera/image/compressed &
 
+# Start video recording using Python node
+roslaunch video_recorder video_recorder.launch &
+
+echo "Server setup complete. Video recording started."
