@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export FFMPEG_LOG_LEVEL=quiet
+export AV_LOG_FORCE_NOCOLOR=1
+
 # Setup ROS environment	
 source /opt/ros/noetic/setup.bash
 source ~/Documents/ELEC491_TL101/icon_drone/devel/setup.bash
@@ -26,18 +29,17 @@ roslaunch fdilink_ahrs ahrs_data.launch & sleep 2
 roslaunch mavros px4.launch \
   publish_imu:=false & sleep 2
 
-# Launch USB webcam (raw output)
-# Add color format parameter to avoid conversion:
+# Launch USB webcam (raw output) - Updated resolution
 rosrun usb_cam usb_cam_node \
   _video_device:=/dev/video6 \
-  _image_width:=640 \
-  _image_height:=480 \
+  _image_width:=1280 \
+  _image_height:=720 \
   _pixel_format:=mjpeg \
   _framerate:=30 \
   _camera_frame_id:=usb_cam \
   _auto_focus:=false \
   _focus:=0 \
-  _image_encoding:=yuv422 \
+  _suppress_info_output:=true \
   & sleep 2
 
 # Republish webcam image as compressed for Depth-Anything
