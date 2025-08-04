@@ -2,7 +2,7 @@
 
 # Setup ROS environment	
 source /opt/ros/noetic/setup.bash
-source ~/ELEC491_TL101/icon_drone/devel/setup.bash
+source ~/Documents/ELEC491_TL101/icon_drone/devel/setup.bash
 
 export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:PATH/ORB_SLAM3/Examples/ROS
 
