@@ -7,20 +7,21 @@ File.version: "1.0"
 
 Camera.type: "PinHole"
 
-# Camera calibration parameters - using your calibration data
-Camera1.fx: 908.1286805363305
-Camera1.fy: 908.6504899131667
-Camera1.cx: 573.1734967410252
-Camera1.cy: 461.7797150177321
+# Camera calibration parameters from your actual camera calibration
+Camera1.fx: 1425.8471166943561
+Camera1.fy: 1425.85205707241
+Camera1.cx: 995.6116322284139
+Camera1.cy: 522.5234623339283
 
 # Distortion parameters from your camera calibration
-Camera1.k1: 0.013919634121503452
-Camera1.k2: 0.05126755406314241
-Camera1.p1: 0.0015114910405962395
-Camera1.p2: 0.001145895728355362
-Camera1.k3: -0.22226158566827822
+Camera1.k1: 0.059522962599012165
+Camera1.k2: -0.29237963256473987
+Camera1.p1: -0.0014999512394913174
+Camera1.p2: -0.00026753264456687417
+Camera1.k3: 0.38244970605037076
 
-# Camera resolution - using 1920x1080 as requested
+# Camera resolution (update based on your calibration - appears to be higher resolution)
+# Your cx/cy values suggest resolution around 1920x1080 or similar
 Camera.width: 1920
 Camera.height: 1080
 
@@ -35,13 +36,19 @@ Stereo.ThDepth: 40.0
 Stereo.b: 0.0  # Not used for monocular setup
 
 # Depth map values factor for Depth-Anything-V2
-RGBD.DepthMapFactor: 1000.0
+# Depth-Anything-V2 typically outputs normalized depth [0,1] or metric depth
+# Adjust this factor based on your Depth-Anything-V2 output format
+RGBD.DepthMapFactor: 1000.0  # If depth is in meters, use 1000 to convert to mm
+                             # If depth is normalized [0,1], you may need a different factor
 
 #--------------------------------------------------------------------------------------------
 # IMU Parameters (Adjust for your specific IMU!)
 #--------------------------------------------------------------------------------------------
 
 # Transformation from body-frame (IMU) to camera frame
+# This is CRITICAL - you must determine this transformation for your setup
+# Example assumes IMU and camera are roughly aligned (identity transformation)
+# You need to measure/calibrate this for your actual hardware setup
 IMU.T_b_c1: !!opencv-matrix
    rows: 4
    cols: 4
@@ -52,11 +59,12 @@ IMU.T_b_c1: !!opencv-matrix
           0.0, 0.0, 0.0, 1.0]
 
 # IMU noise parameters (adjust based on your IMU specifications)
-IMU.NoiseGyro: 1e-3
-IMU.NoiseAcc: 1e-2
-IMU.GyroWalk: 1e-6
-IMU.AccWalk: 1e-4
-IMU.Frequency: 200.0
+# These values are estimates - check your IMU datasheet for actual noise characteristics
+IMU.NoiseGyro: 1e-3    # Gyroscope noise (rad/s^0.5)
+IMU.NoiseAcc: 1e-2     # Accelerometer noise (m/s^1.5)
+IMU.GyroWalk: 1e-6     # Gyroscope random walk (rad/s^1.5)
+IMU.AccWalk: 1e-4      # Accelerometer random walk (m/s^2.5)
+IMU.Frequency: 200.0   # IMU frequency in Hz (adjust to your IMU's rate)
 
 # Do not insert keyframes when recently lost
 IMU.InsertKFsWhenLost: 0
@@ -64,9 +72,17 @@ IMU.InsertKFsWhenLost: 0
 #--------------------------------------------------------------------------------------------
 # ORB Feature Extraction Parameters
 #--------------------------------------------------------------------------------------------
+# ORB Extractor: Number of features per image
 ORBextractor.nFeatures: 1250
+
+# ORB Extractor: Scale factor between levels in the scale pyramid 	
 ORBextractor.scaleFactor: 1.2
+
+# ORB Extractor: Number of levels in the scale pyramid	
 ORBextractor.nLevels: 8
+
+# ORB Extractor: Fast threshold
+# Adjust these if your camera images have different contrast characteristics
 ORBextractor.iniThFAST: 20
 ORBextractor.minThFAST: 7
 
@@ -87,6 +103,13 @@ Viewer.ViewpointF: 500.0
 #--------------------------------------------------------------------------------------------
 # Depth-Anything-V2 Specific Parameters
 #--------------------------------------------------------------------------------------------
-RGBD.DepthThreshold: 0.1
-RGBD.MaxDepth: 10.0
-RGBD.MinDepth: 0.1
+# These parameters may need adjustment based on Depth-Anything-V2 characteristics
+
+# Depth quality threshold (filter out unreliable depth estimates)
+RGBD.DepthThreshold: 0.1  # Minimum depth value to consider valid
+
+# Maximum depth for processing (Depth-Anything-V2 may have effective range limits)
+RGBD.MaxDepth: 10.0  # Maximum depth in meters to consider
+
+# Minimum depth for processing
+RGBD.MinDepth: 0.1   # Minimum depth in meters to consider

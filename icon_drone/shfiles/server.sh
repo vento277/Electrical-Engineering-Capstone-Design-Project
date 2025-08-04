@@ -25,13 +25,15 @@ roslaunch fdilink_ahrs ahrs_data.launch & sleep 2
 # Launch MAVROS for PX4 connection
 roslaunch mavros px4.launch & sleep 2
 
-# Launch USB webcam (raw output)
+# Launch USB webcam (raw output) - Updated resolution
 rosrun usb_cam usb_cam_node \
   _video_device:=/dev/video0 \
-  _image_width:=640 \
-  _image_height:=480 \
+  _image_width:=1920 \
+  _image_height:=1080 \
   _pixel_format:=yuyv \
   _camera_frame_id:=usb_cam \
+  _auto_focus:=false \
+  _focus:=0 \
   & sleep 2
 
 # Republish webcam image as compressed for Depth-Anything
