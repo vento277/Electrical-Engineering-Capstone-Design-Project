@@ -27,7 +27,7 @@ roslaunch mavros px4.launch & sleep 2
 
 # Launch USB webcam (raw output) - Updated resolution
 rosrun usb_cam usb_cam_node \
-  _video_device:=/dev/video0 \
+  _video_device:=/dev/video6 \
   _image_width:=1920 \
   _image_height:=1080 \
   _pixel_format:=yuyv \
@@ -39,7 +39,17 @@ rosrun usb_cam usb_cam_node \
 # Republish webcam image as compressed for Depth-Anything
 rosrun image_transport republish raw in:=/usb_cam/image_raw compressed out:=/camera/image/compressed &
 
-# Start video recording using Python node
+# Start video recording node (ready to receive commands)
 roslaunch video_recorder video_recorder.launch &
 
-echo "Server setup complete. Video recording started."
+echo "Server setup complete. Video recorder ready for remote commands."
+echo "To start recording: rosservice call /video_recorder/start_recording"
+echo "To stop recording:  rosservice call /video_recorder/stop_recording"
+
+# Keep script running and handle cleanup
+trap 'echo "Stopping all processes..."; pkill -f ros; exit' INT TERM
+
+# Wait indefinitely (until Ctrl+C)
+while true; do
+    sleep 1
+done
