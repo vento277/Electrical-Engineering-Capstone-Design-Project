@@ -1,0 +1,8 @@
+prefix=/home/raeditio/Documents/ELEC491_TL101/icon_drone/devel
+
+Name: px4ctrl
+Description: Description of px4ctrl
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -133,7 +133,7 @@ int main(int argc, char **argv) {
     ImuGrabber imugb;
     RGBDGrabber grabber(&SLAM, &imugb);
 
-    ros::Subscriber sub_rgb = nh.subscribe("/camera/color/image_raw", 100, &RGBDGrabber::GrabRGB, &grabber);
+    ros::Subscriber sub_rgb = nh.subscribe("/camera/image_raw", 100, &RGBDGrabber::GrabRGB, &grabber);
     ros::Subscriber sub_depth = nh.subscribe("/depth_anything/image", 100, &RGBDGrabber::GrabDepth, &grabber);
     ros::Subscriber sub_imu = nh.subscribe("/imu", 1000, &ImuGrabber::GrabImu, &imugb);
 

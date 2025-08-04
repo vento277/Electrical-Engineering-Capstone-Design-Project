@@ -1,0 +1,8 @@
+prefix=/home/raeditio/Documents/ELEC491_TL101/icon_drone/devel
+
+Name: raspicam_node
+Description: Description of raspicam_node
+Version: 0.5.0
+Cflags: -I/home/raeditio/Documents/ELEC491_TL101/icon_drone/devel/include -I/home/raeditio/Documents/ELEC491_TL101/icon_drone/src/realflight_modules/raspicam_node/include
+Libs: -L${prefix}/lib 
+Requires: message_runtime std_msgs

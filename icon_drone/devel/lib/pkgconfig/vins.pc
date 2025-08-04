@@ -1,0 +1,8 @@
+prefix=/home/raeditio/Documents/ELEC491_TL101/icon_drone/devel
+
+Name: vins
+Description: Description of vins
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -39,6 +39,7 @@ include_directories(
   ${THIRDPARTY_DIR}/DBoW2
   ${THIRDPARTY_DIR}/DBoW2/DUtils
   ${THIRDPARTY_DIR}/g2o
+  ${THIRDPARTY_DIR}/g2o/build  # Add this line
   ${THIRDPARTY_DIR}/Sophus
 )
 

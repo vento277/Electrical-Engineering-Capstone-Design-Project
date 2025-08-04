@@ -1,0 +1,8 @@
+prefix=/home/raeditio/Documents/ELEC491_TL101/icon_drone/devel
+
+Name: depth_anything
+Description: Description of depth_anything
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
