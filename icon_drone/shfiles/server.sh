@@ -46,3 +46,8 @@ roslaunch realsense2_camera rs_camera.launch \
 #rosrun image_transport republish raw in:=/camera/infra2/image_rect_raw compressed out:=/image2 &
 
 roslaunch px4ctrl run_ctrl.launch & sleep 5
+
+# Start video recording node (ready to receive commands)
+roslaunch video_recorder video_recorder.launch &
+
+echo "Server setup complete. Video recorder ready for remote commands."
