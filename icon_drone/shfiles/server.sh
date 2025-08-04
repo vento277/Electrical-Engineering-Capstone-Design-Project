@@ -29,13 +29,11 @@ roslaunch mavros px4.launch \
 # Launch USB webcam (raw output) - Updated resolution
 rosrun usb_cam usb_cam_node \
   _video_device:=/dev/video6 \
-  _image_width:=1280 \
-  _image_height:=720 \
+  _image_width:=640 \
+  _image_height:=480 \
   _pixel_format:=mjpeg \
   _framerate:=30 \
   _camera_frame_id:=usb_cam \
-  _auto_focus:=false \
-  _focus:=0 \
   & sleep 2
 
 # Republish webcam image as compressed for Depth-Anything

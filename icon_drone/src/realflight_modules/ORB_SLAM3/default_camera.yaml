@@ -8,10 +8,10 @@ File.version: "1.0"
 Camera.type: "PinHole"
 
 # Camera calibration parameters - scaled for 1280x720
-Camera1.fx: 605.4191203575537
-Camera1.fy: 605.7669932754445
-Camera1.cx: 382.11566449401683
-Camera1.cy: 307.85314334515473
+Camera1.fx: 302.7  # 605.4 * (640/1280)
+Camera1.fy: 302.9  # 605.8 * (480/720)  
+Camera1.cx: 191.1  # 382.1 * (640/1280)
+Camera1.cy: 205.2  # 307.9 * (480/720)
 
 # Distortion parameters from your camera calibration (unchanged)
 Camera1.k1: 0.013919634121503452
@@ -21,8 +21,8 @@ Camera1.p2: 0.001145895728355362
 Camera1.k3: -0.22226158566827822
 
 # Camera resolution - updated to match camera capability
-Camera.width: 1280
-Camera.height: 720
+Camera.width: 640
+Camera.height: 480
 
 # Camera frames per second 
 Camera.fps: 30
