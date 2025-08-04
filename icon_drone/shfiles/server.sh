@@ -36,6 +36,7 @@ rosrun usb_cam usb_cam_node \
   _camera_frame_id:=usb_cam \
   _auto_focus:=false \
   _focus:=0 \
+  _suppress_info_output:=true \
   & sleep 2
 
 # Republish webcam image as compressed for Depth-Anything

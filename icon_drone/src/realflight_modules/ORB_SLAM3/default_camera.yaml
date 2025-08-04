@@ -7,6 +7,8 @@ File.version: "1.0"
 
 Camera.type: "PinHole"
 
+Camera.topic: "/camera/image_raw
+
 # Camera calibration parameters - scaled for 1280x720
 Camera1.fx: 605.4191203575537
 Camera1.fy: 605.7669932754445
