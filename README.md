@@ -112,6 +112,11 @@ git checkout feature/MonoNav
 - **Nabiha Khan** ([nk11235](https://github.com/nk11235))- Lead Communication, Simulation Design
 - **Spencer Tipold**- Lead Lab & Validation, Hardware Design
 - **Rylan-Bowen Colthurst**- Lead Client Support, Hardware Design
+ 
+## Acknowledgments
+This project builds upon the base code and framework provided by **ICON Lab @ Columbia** as part of the UBC ELEC 491 Capstone Course.  
+The initial source was derived from the **[Fast-Drone-250](https://github.com/ZJU-FAST-Lab/Fast-Drone-250)** project and adapted for our custom hardware and navigation pipeline.  
+We have since extended the system with monocamera-based RGB-D SLAM using **[ORB-SLAM3](https://github.com/UZ-SLAMLab/ORB_SLAM3)** and **[Depth-Anything-V2](https://github.com/DepthAnything/Depth-Anything-V2)**.
 
 ## License
 This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
