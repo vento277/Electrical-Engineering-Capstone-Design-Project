@@ -1,3 +1,1 @@
-# ELEC491_TL101
-This is the official repository of TL101 of ELEC 491 Capstone Course of UBC.
-This project is in collaboration with ICON Labs.
+Edit the icon_drone/src/realflight_modules/ORB_SLAM3/default_camera.yaml and icon_drone/src/depth_anything/camera_intrinsics.yaml parameters before using. Camera Calibration is required for accurate metric depth estimation.
